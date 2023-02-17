@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
+import { Reducer } from "./Reducer";
+import { formatNumber } from "./FormatNumber";
+import { ACTIONS } from "./Actions";
 
 function App() {
   const currentTheme = localStorage.getItem("theme");
@@ -10,6 +13,11 @@ function App() {
     localStorage.setItem("theme", e.target.value);
     setTheme(e.target.value);
   };
+
+  const [{ currentValue, previousValue, operator }, dispatch] = useReducer(
+    Reducer,
+    {}
+  );
 
   return (
     <div className={`App ${theme}`}>
@@ -53,26 +61,129 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="display"></div>
+        <div className="display">
+          <div className="prev">
+            {formatNumber(previousValue)} {operator}
+          </div>
+          <div className="cur">{formatNumber(currentValue)}</div>
+        </div>
         <div className="keyboard">
-          <button className="key">7</button>
-          <button className="key">8</button>
-          <button className="key">9</button>
-          <button className="key del">DEL</button>
-          <button className="key">4</button>
-          <button className="key">5</button>
-          <button className="key">6</button>
-          <button className="key">+</button>
-          <button className="key">1</button>
-          <button className="key">2</button>
-          <button className="key">3</button>
-          <button className="key">-</button>
-          <button className="key">.</button>
-          <button className="key">0</button>
-          <button className="key">/</button>
-          <button className="key">x</button>
-          <button className="key reset">RESET</button>
-          <button className="key equal">=</button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "7" })}
+          >
+            7
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "8" })}
+          >
+            8
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "9" })}
+          >
+            9
+          </button>
+          <button
+            className="key del"
+            onClick={() => dispatch({ type: ACTIONS.DELETE_DIGIT })}
+          >
+            DEL
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "4" })}
+          >
+            4
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "5" })}
+          >
+            5
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "6" })}
+          >
+            6
+          </button>
+          <button
+            className="key"
+            onClick={() =>
+              dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload: "+" })
+            }
+          >
+            +
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "1" })}
+          >
+            1
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "2" })}
+          >
+            2
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "3" })}
+          >
+            3
+          </button>
+          <button
+            className="key"
+            onClick={() =>
+              dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload: "-" })
+            }
+          >
+            -
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "." })}
+          >
+            .
+          </button>
+          <button
+            className="key"
+            onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: "0" })}
+          >
+            0
+          </button>
+          <button
+            className="key"
+            onClick={() =>
+              dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload: "/" })
+            }
+          >
+            /
+          </button>
+          <button
+            className="key"
+            onClick={() =>
+              dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload: "x" })
+            }
+          >
+            x
+          </button>
+          <button
+            className="key reset"
+            onClick={() => dispatch({ type: ACTIONS.RESET })}
+          >
+            RESET
+          </button>
+          <button
+            className="key equal"
+            onClick={() => dispatch({ type: ACTIONS.EVALUATE })}
+          >
+            =
+          </button>
         </div>
       </div>
     </div>

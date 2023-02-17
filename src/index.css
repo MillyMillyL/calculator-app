@@ -27,6 +27,7 @@
   --white: hsl(0, 0%, 100%);
   --header-text: hsl(0, 0%, 100%);
   --equal-text: hsl(0, 0%, 100%);
+  --display-text: hsl(0, 0%, 100%);
 }
 
 .light-gray-theme {
@@ -50,6 +51,7 @@
   --white: hsl(0, 0%, 100%);
   --equal-text: hsl(0, 0%, 100%);
   --header-text: hsl(60, 10%, 19%);
+  --display-text: hsl(60, 10%, 19%);
 }
 
 .dark-violet-theme {
@@ -73,6 +75,7 @@
   --white: hsl(0, 0%, 100%);
   --equal-text: hsl(198, 20%, 13%);
   --header-text: hsl(52, 100%, 62%);
+  --display-text: hsl(52, 100%, 62%);
 }
 
 .App {
@@ -161,6 +164,7 @@ input[type="radio"]:checked {
   background-color: var(--screen-background);
   margin-top: 2rem;
   border-radius: 0.5rem;
+  color: var(--display-text);
 }
 
 .keyboard {
