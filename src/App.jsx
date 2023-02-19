@@ -6,7 +6,12 @@ import { ACTIONS } from "./Actions";
 function App() {
   const currentTheme = localStorage.getItem("theme");
   const [theme, setTheme] = useState(
-    currentTheme ? currentTheme : "dark-blue-theme"
+    currentTheme
+      ? currentTheme
+      : window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark-blue-theme"
+      : "light-gray-theme"
   );
 
   const handleThemeChange = (e) => {
